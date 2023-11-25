@@ -1,4 +1,5 @@
 import Hero from "./components/Hero";
+import TopCoin from "./components/TopCoin";
 import HeroCanves from "./components/canves/HeroCanves";
 
 export default function MyComponent() {
@@ -6,6 +7,7 @@ export default function MyComponent() {
     <div>
       {/* <HeroCanves /> */}
       <Hero />
+      <TopCoin />
     </div>
   );
 }
