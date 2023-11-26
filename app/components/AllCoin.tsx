@@ -1,18 +1,21 @@
 import Image from "next/image";
+import Link from "next/link";
 async function GetData() {
   const res = await fetch(
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&locale=en",
-    { next: { revalidate: 450 } }
+    { cache: "no-cache", next: { revalidate: 450 } }
   );
   return res.json();
 }
 async function AllCoin() {
   const Data: [] = await GetData();
-
+  function numberWithCommas(x: number) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   return (
-    <div className="w-full min-h-screen overflow-x-hidden  relative">
-      <div className="absolute -right-[400px] -bottom-40 lg:-bottom-[400px] -z-10">
-        <div className="h-[600px] w-[300px] lg:h-[1000px] lg:w-[1000px] relative ">
+    <div className="w-full min-h-screen   relative">
+      <div className="absolute -right-[0px] -bottom-40 lg:-bottom-[300px] -z-10">
+        <div className="h-[600px] w-[300px] lg:h-[500px] lg:w-[500px] relative ">
           <Image
             src={"/texture3.png"}
             fill
@@ -39,53 +42,66 @@ async function AllCoin() {
           Dive into the Crypto Universe: Real-time prices, insights, and
           information for every digital asset at your fingertips.
         </p>
-        <div className="w-full overflow-x-auto">
-          <table className="min-w-[500px] w-full h-full py-5 px-4 bg-[#1A1B23]/40 rounded-xl">
-            <thead className="text-white text-start ">
-              <th className="px-2 py-4  bg-red-900 text-center">#</th>
-              <th className="px-6 py-4 min-w-[200px] bg-emerald-500 text-start">
+        <div className="w-full border rounded-xl border-white/10 overflow-x-auto mt-10">
+          <table className="min-w-[500px] w-full h-full  py-5 px-4 bg-[#1A1B23]/70 rounded-xl">
+            <thead className="text-white text-start border-b border-b-white/10 ">
+              <th className="px-2 py-10 font-extrabold tracking-wide text-center">
+                #
+              </th>
+              <th className="px-6 py-10 font-extrabold tracking-wide min-w-[200px] text-start">
                 Name
               </th>
-              <th className="px-6 py-4 min-w-[200px] bg-emerald-800 text-start">
+              <th className="px-6 py-10 font-extrabold tracking-wide min-w-[200px] text-start">
                 Symbol
               </th>
-              <th className="px-6 py-4 min-w-[200px] bg-emerald-400 text-start">
+              <th className="px-6 py-10 font-extrabold tracking-wide min-w-[200px] text-start">
                 Current Price
               </th>
-              <th className="px-6 py-4 min-w-[200px] bg-emerald-700 text-start">
+              <th className="px-6 py-10 font-extrabold tracking-wide min-w-[200px] text-start">
                 24h Change
               </th>
-              <th className="px-6 py-4 min-w-[200px] bg-emerald-900 text-start">
+              <th className="px-6 py-10 font-extrabold tracking-wide min-w-[200px] text-start">
                 Market Cap
               </th>
             </thead>
             <tbody>
               {Data.map((item: CryptoInfo, index: number) => {
                 return (
-                  <tr key={index}>
-                    <td className="py-7 min-w-[60px] max-w-[60px] max-h-[60px]  min-h-[60px]  rounded-full relative  bg-red-900">
+                  <tr
+                    key={index}
+                    className="border-b border-b-white/10 hover:bg-[#1A1B23]/90 duration-100"
+                  >
+                    <td className="py-10 px-10 relative ">
                       <Image
                         src={item.image}
                         fill
                         alt={item.id}
-                        className="object-contain"
+                        className="object-contain p-6 "
                       />
                     </td>
-                    <td className=" bg-emerald-500 px-6 py-4">
-                      <p className="text-white font-semibold">{item.name}</p>
+                    <td className=" px-6 py-10">
+                      <p className="text-white font-bold max-w-[200px] truncate">
+                        {item.name}
+                      </p>
                     </td>
-                    <td className=" bg-emerald-800 px-6 py-4">
+                    <td className=" px-6 py-10">
                       <p className="text-white font-semibold">{item.symbol}</p>
                     </td>
-
-                    <td className="text-white font-semibold bg-emerald-400 px-6 py-4">
-                      {item.current_price}
+                    <td className="text-white font-semibold px-6 py-10">
+                      $ {item.current_price.toFixed(2)}
                     </td>
-                    <td className="text-white font-semibold bg-emerald-700 px-6 py-4">
-                      {item.price_change_percentage_24h}
+                    <td
+                      className={`text-white font-semibold px-6 py-10 ${
+                        item.price_change_percentage_24h >= 0
+                          ? "text-green-500"
+                          : "text-red-500"
+                      }`}
+                    >
+                      {item.price_change_percentage_24h >= 0 ? "+" : null}
+                      {item.price_change_percentage_24h?.toFixed(2)} %
                     </td>
-                    <td className="text-white font-semibold bg-emerald-900 px-6 py-4">
-                      {item.market_cap}
+                    <td className="text-white font-semibold px-6 py-10">
+                      $ {numberWithCommas(item.market_cap)}
                     </td>
                   </tr>
                 );
@@ -93,6 +109,13 @@ async function AllCoin() {
             </tbody>
           </table>
         </div>
+        <Link href={"/explorecoins"}>
+          <div className="p-[2px] px-[2px] rounded-xl bg-gradient-to-tr from-[#933FFE] to-[#18C8FF] hover:from-[#c69bff] hover:to-[#a6eaff] duration-200">
+            <button className="bg-gradient-to-tr from-[#933FFE] to-[#18C8FF] hover:shadow-[#933FFE]/60 hover:shadow-2xl  duration-200  text-white px-6 py-4 rounded-xl">
+              See more...
+            </button>
+          </div>
+        </Link>
       </div>
     </div>
   );
