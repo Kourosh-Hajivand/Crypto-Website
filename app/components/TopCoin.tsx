@@ -44,7 +44,7 @@ async function TopCoin() {
                     </p>
                   </div>
                 </div>
-                <p className="font-semibold text-sm">
+                <p className="font-semibold text-sm lg:text-base">
                   {item.item.price_btc.toString().substring(0, 8)}
                   <span className="font-semibold ml-1">BTC</span>
                 </p>

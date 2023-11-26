@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function Hero() {
   return (
-    <div className="w-full  h-screen flex items-center justify-center relative">
+    <div className="w-full h-screen flex items-center justify-center relative">
       <div className="absolute right-0 -bottom-40 lg:-bottom-22 -z-10">
         <div className="h-[600px] w-[300px] lg:h-screen lg:w-[500px] relative ">
           <Image
