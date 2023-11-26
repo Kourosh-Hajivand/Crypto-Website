@@ -1,19 +1,13 @@
+import { LinkIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import Link from "next/link";
-async function GetData() {
-  const res = await fetch(
-    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&locale=en",
-    { cache: "no-cache", next: { revalidate: 450 } }
-  );
-  return res.json();
-}
-async function AllCoin() {
-  const Data: [] = await GetData();
+
+async function AllCoin({ data }: { data: CryptoInfo[] }) {
   function numberWithCommas(x: number) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   return (
-    <div className="w-full min-h-screen   relative">
+    <div className="w-full min-h-screen  relative">
       <div className="absolute -right-[0px] -bottom-40 lg:-bottom-[300px] -z-10">
         <div className="h-[600px] w-[300px] lg:h-[500px] lg:w-[500px] relative ">
           <Image
@@ -63,49 +57,62 @@ async function AllCoin() {
               <th className="px-6 py-10 font-extrabold tracking-wide min-w-[200px] text-start">
                 Market Cap
               </th>
+              <th className="px-6 py-10 font-extrabold tracking-wide min-w-[50px] text-start"></th>
             </thead>
             <tbody>
-              {Data.map((item: CryptoInfo, index: number) => {
-                return (
-                  <tr
-                    key={index}
-                    className="border-b border-b-white/10 hover:bg-[#1A1B23]/90 duration-100"
-                  >
-                    <td className="py-10 px-10 relative ">
-                      <Image
-                        src={item.image}
-                        fill
-                        alt={item.id}
-                        className="object-contain p-6 "
-                      />
-                    </td>
-                    <td className=" px-6 py-10">
-                      <p className="text-white font-bold max-w-[200px] truncate">
-                        {item.name}
-                      </p>
-                    </td>
-                    <td className=" px-6 py-10">
-                      <p className="text-white font-semibold">{item.symbol}</p>
-                    </td>
-                    <td className="text-white font-semibold px-6 py-10">
-                      $ {item.current_price.toFixed(2)}
-                    </td>
-                    <td
-                      className={`text-white font-semibold px-6 py-10 ${
-                        item.price_change_percentage_24h >= 0
-                          ? "text-green-500"
-                          : "text-red-500"
-                      }`}
+              {data &&
+                data.map((item, index: number) => {
+                  return (
+                    <tr
+                      key={index}
+                      className="border-b border-b-white/10 hover:bg-[#1A1B23]/90 group duration-100"
                     >
-                      {item.price_change_percentage_24h >= 0 ? "+" : null}
-                      {item.price_change_percentage_24h?.toFixed(2)} %
-                    </td>
-                    <td className="text-white font-semibold px-6 py-10">
-                      $ {numberWithCommas(item.market_cap)}
-                    </td>
-                  </tr>
-                );
-              })}
+                      <td className="py-10 px-10 relative ">
+                        <Link href={`/coin/${item.id}`}>
+                          <Image
+                            src={item.image}
+                            fill
+                            alt={item.id}
+                            className="object-contain p-6 "
+                          />
+                        </Link>
+                      </td>
+                      <td className=" px-6 py-10">
+                        <Link href={`/coin/${item.id}`}>
+                          <p className="text-white font-bold max-w-[200px] truncate">
+                            {item.name}
+                          </p>
+                        </Link>
+                      </td>
+                      <td className=" px-6 py-10">
+                        <p className="text-white font-semibold">
+                          {item.symbol}
+                        </p>
+                      </td>
+                      <td className="text-white font-semibold px-6 py-10">
+                        $ {item.current_price.toFixed(2)}
+                      </td>
+                      <td
+                        className={`text-white font-semibold px-6 py-10 ${
+                          item.price_change_percentage_24h >= 0
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }`}
+                      >
+                        {item.price_change_percentage_24h >= 0 ? "+" : null}
+                        {item.price_change_percentage_24h?.toFixed(2)} %
+                      </td>
+                      <td className="text-white font-semibold px-6 py-10">
+                        $ {numberWithCommas(item.market_cap)}
+                      </td>
+                      <td className="text-white font-semibold px-6 py-10">
+                        <Link href={`/coin/${item.id}`}>
+                          <LinkIcon className="w-7 h-7 group-hover:text-[#9b5fea]" />
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>

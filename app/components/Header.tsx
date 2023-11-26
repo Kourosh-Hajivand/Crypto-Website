@@ -6,7 +6,7 @@ function Header() {
     <div
       className={`fixed duration-200  top-0 left-0 w-full py-5 z-10 border-b border-b-white/10 bg-black/10 backdrop-blur-md`}
     >
-      <div className="w-full flex items-center justify-between max-w-[1440px] mx-auto">
+      <div className="w-full flex items-center justify-between max-w-[1440px] gap-5 mx-auto px-6">
         <div className="w-[60px] h-[60px] relative">
           <Image src={"/PersonalLogo.png"} alt="Personal" fill />
         </div>
