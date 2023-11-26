@@ -7,8 +7,11 @@ function Header() {
       className={`fixed duration-200  top-0 left-0 w-full py-5 z-10 border-b border-b-white/10 bg-black/10 backdrop-blur-md`}
     >
       <div className="w-full flex items-center justify-between max-w-[1440px] gap-5 mx-auto px-6">
-        <div className="w-[60px] h-[60px] relative">
-          <Image src={"/PersonalLogo.png"} alt="Personal" fill />
+        <div className="items-center justify-center flex gap-5">
+          <div className="w-[60px] h-[60px] relative">
+            <Image src={"/PersonalLogo.png"} alt="Personal" fill />
+          </div>
+          <h1 className="text-2xl text-white font-bold">Crypto</h1>
         </div>
         <div className="w-full max-w-[400px] rounded-2xl  px-6 border border-white/20 flex items-center gap-2 py-4">
           <MagnifyingGlassIcon className="w-6 h-6 text-white" />
@@ -16,6 +19,7 @@ function Header() {
             className="flex-1 text-white outline-none bg-transparent placeholder:text-white/40"
             placeholder="Search Coin here...."
           />
+          d
         </div>
       </div>
     </div>
