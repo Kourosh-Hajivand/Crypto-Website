@@ -1,5 +1,10 @@
 import Image from "next/image";
-
+async function DynamicCoin(id: string) {
+  const res = await fetch(`https://api.coingecko.com/api/v3/coins/${id}`, {
+    cache: "no-cache",
+  });
+  return res.json();
+}
 function page({ params }: { params: { id: string } }) {
   console.log("====================================");
   console.log(params.id);

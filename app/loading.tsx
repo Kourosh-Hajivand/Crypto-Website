@@ -16,9 +16,11 @@ export default function Loading() {
           <div className="bg-[#1A1B23] w-full min-h-[200px] px-6 py-4 rounded-2xl"></div>
           <div className="bg-[#1A1B23] w-full min-h-[200px] px-6 py-4 rounded-2xl"></div>
           <div className="bg-[#1A1B23] w-full min-h-[200px] px-6 py-4 rounded-2xl"></div>
+          <div className="bg-[#1A1B23] w-full min-h-[200px] px-6 py-4 rounded-2xl"></div>
+          <div className="bg-[#1A1B23] w-full min-h-[200px] px-6 py-4 rounded-2xl"></div>
         </div>
       </div>
-      <div className="w-full min-h-screen  relative">
+      <div className="w-full min-h-screen relative">
         <div className="absolute -right-[0px] -bottom-40 lg:-bottom-[300px] -z-10">
           <div className="h-[600px] w-[300px] lg:h-[500px] lg:w-[500px] relative ">
             <Image
@@ -29,6 +31,7 @@ export default function Loading() {
             />
           </div>
         </div>
+
         <div className="absolute -left-60 -top-44 lg:-left-16 lg:-top-52 -z-10">
           <div className="h-[1000px] w-[500px] relative">
             <Image
@@ -37,8 +40,19 @@ export default function Loading() {
               className="object-fill animate-pulse"
               alt="texture"
             />
-            <div className="min-w-[500px] w-full min-h-[600px] animate-pulse  py-5 px-4 bg-[#1A1B23]/70 rounded-xl"></div>
           </div>
+        </div>
+        <div className="w-full flex flex-col items-center justify-center gap-5 max-w-[1440px] px-6 mx-auto my-32 ">
+          <h1 className="text-2xl text-center lg:text-6xl text-white font-black">
+            Explore the Crypto Universe
+          </h1>
+          <p className="text-white/40  max-w-[850px] text-xs text-center lg:text-xl">
+            Dive into the Crypto Universe: Real-time prices, insights, and
+            information for every digital asset at your fingertips.
+          </p>
+          <div className="w-full">
+            <div className="w-full min-h-[600px] animate-pulse  py-5 px-4 bg-[#1A1B23] rounded-xl "></div>
+          </div>{" "}
         </div>
       </div>
     </div>

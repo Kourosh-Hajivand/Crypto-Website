@@ -93,7 +93,7 @@ async function AllCoin({ data }: { data: CryptoInfo[] }) {
                         $ {item.current_price.toFixed(2)}
                       </td>
                       <td
-                        className={`text-white font-semibold px-6 py-10 ${
+                        className={` font-semibold px-6 py-10 ${
                           item.price_change_percentage_24h >= 0
                             ? "text-green-500"
                             : "text-red-500"

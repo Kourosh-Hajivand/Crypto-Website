@@ -3,6 +3,7 @@ import AllCoin from "./components/AllCoin";
 import Hero from "./components/Hero";
 import TopCoin from "./components/TopCoin";
 import HeroCanves from "./components/canves/HeroCanves";
+import Loading from "./loading";
 
 async function GetServerPing() {
   const res = await fetch("https://api.coingecko.com/api/v3/ping");
