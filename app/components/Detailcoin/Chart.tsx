@@ -50,13 +50,40 @@ function Chart({
         fill: true,
         data: coinchartData.map((item) => item.y),
         label: id,
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: "#933FFE",
+        backgroundColor: "rgb (147, 63, 254, .5)",
         pointRadius: 1,
       },
     ],
   };
-  return <Line options={options} data={data} />;
+  return (
+    <Line
+      options={{
+        responsive: true,
+        plugins: {
+          legend: true,
+        },
+      }}
+      data={{
+        labels: coinchartData.map((item, index) =>
+          moment(item.x).format("MMMDD")
+        ),
+
+        datasets: [
+          {
+            fill: true,
+            data: coinchartData.map((item) => item.y),
+            label: id,
+            borderColor: "#933FFE",
+            backgroundColor: "rgba(147, 63, 254, 0.2)",
+            pointRadius: 0.5,
+            borderJoinStyle: "miter",
+            tension: 0.4,
+          },
+        ],
+      }}
+    />
+  );
 }
 
 export default Chart;

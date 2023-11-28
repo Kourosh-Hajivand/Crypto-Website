@@ -1,3 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.dangerous-html a {
+  @apply text-sky-500 underline decoration-[#933FFE];
+}
