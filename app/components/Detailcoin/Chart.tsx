@@ -56,11 +56,7 @@ function Chart({
       },
     ],
   };
-  return (
-    <div className="w-full max-w-[850px] h-screen flex items-center justify-center ">
-      <Line options={options} data={data} />
-    </div>
-  );
+  return <Line options={options} data={data} />;
 }
 
 export default Chart;
